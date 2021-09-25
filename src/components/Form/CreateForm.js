@@ -1,60 +1,49 @@
 import React from "react";
-import { elementsOfFormType } from "../../databaseTest/FakeFormData";
+import { sampleSourceForElement } from "../../databaseTest/FakeFormData";
 import Input from "./Elements/Input";
 import SaveButton from "./Elements/SaveButton";
-import OptionTickBox from "./Elements/OptionTickBox";
+import CheckBox from "./Elements/CheckBox";
+import RadioBox from "./Elements/RadioBox";
 import ComboBox from "./Elements/ComboBox";
 import { Form } from "react-bootstrap";
 
 class CreateForm extends React.Component {
-  renderElement() {
-    const dataInput = this.props.dataInput;
-    const elementsInForm = this.props.elementsInForm;
-
-    return elementsInForm.map((ele, index) => {
-      switch (ele.edit_type) {
-        case elementsOfFormType.Input:
-          return (
-            <Input
-              ele={ele}
-              dataInput={dataInput}
-              handleInputChange={this.props.handleInputChange}
-            />
-          );
-        case elementsOfFormType.Button:
-          return (
-            <SaveButton
-              ele={ele}
-              handleButtonClicked={this.props.handleButtonClicked}
-            />
-          );
-        case elementsOfFormType.RadioBox:
-        case elementsOfFormType.CheckBox:
-          return (
-            <OptionTickBox
-              ele={ele}
-              dataInput={dataInput}
-              handleInputChange={this.props.handleInputChange}
-            />
-          );
-        case elementsOfFormType.ComboBox:
-          return (
-            <ComboBox
-              ele={ele}
-              dataInput={dataInput}
-              handleInputChange={this.props.handleInputChange}
-            />
-          );
-
-        default:
-          break;
-      }
-      return false;
-    });
-  }
-
   render() {
-    return <Form inline>{this.renderElement()}</Form>;
+    return (
+      <Form inline>
+        <Input
+          title="FirstName"
+          fieldname="first_name"
+          handleInputChange={this.props.handleInputChange}
+        />
+        <Input
+          title="Lastname"
+          fieldname="last_name"
+          handleInputChange={this.props.handleInputChange}
+        />
+        <RadioBox
+          fieldname="gender"
+          multi={false}
+          handleInputChange={this.props.handleInputChange}
+          sampleSource={sampleSourceForElement.gender}
+        />
+        <CheckBox
+          fieldname="fav"
+          multi={true}
+          handleInputChange={this.props.handleInputChange}
+          sampleSource={sampleSourceForElement.fav}
+        />
+        <ComboBox
+          fieldname="role"
+          handleInputChange={this.props.handleInputChange}
+          sampleSource={sampleSourceForElement.role}
+        />
+        <SaveButton
+          title="Save"
+          handleButtonClicked={this.props.handleButtonClicked}
+        />
+      </Form>
+    );
   }
 }
 

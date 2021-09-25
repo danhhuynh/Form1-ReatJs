@@ -11,47 +11,63 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      customer: FakeData.customer,
-      customerView: {},
+      customer: {},
       showView: false,
     };
+    this.customer = FakeData.customer;
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleButtonClicked = this.handleButtonClicked.bind(this);
   }
 
   handleInputChange(event) {
+    console.log(event.target);
     const target = event.target;
 
     switch (target.type) {
       case FakeData.elementsOfFormType.RadioBox:
       case FakeData.elementsOfFormType.ComboBox:
       case FakeData.elementsOfFormType.Input:
-        this.setState((prevState) => {
-          let customer = Object.assign({}, prevState.customer);
-          customer[target.name] = target.value;
-          return { customer };
-        });
+        this.customer[target.name] = target.value;
+        // this.setState((prevState) => {
+        //   let customer = Object.assign({}, prevState.customer);
+        //   customer[target.name] = target.value;
+        //   return { customer };
+        // });
 
         break;
       case FakeData.elementsOfFormType.CheckBox:
-        this.setState((prevState) => {
-          let customer = Object.assign({}, prevState.customer);
-          if (target.checked) {
-            customer[target.name] = customer[target.name]
-              ? customer[target.name] + "," + target.value
-              : target.value;
-          } else {
-            customer[target.name] = customer[target.name].replace(
-              target.value,
-              ""
-            );
-          }
-          customer[target.name] = customer[target.name]
-            .replace(/^,/, "")
-            .replace(/,,/gm, ",");
+        if (target.checked) {
+          this.customer[target.name] = this.customer[target.name]
+            ? this.customer[target.name] + "," + target.value
+            : target.value;
+        } else {
+          this.customer[target.name] = this.customer[target.name].replace(
+            target.value,
+            ""
+          );
+        }
+        this.customer[target.name] = this.customer[target.name]
+          .replace(/^,/, "")
+          .replace(/,,/gm, ",");
+        console.log(this.customer);
+        // this.setState((prevState) => {
+        //   let customer = Object.assign({}, prevState.customer);
+        //   if (target.checked) {
+        //     customer[target.name] = customer[target.name]
+        //       ? customer[target.name] + "," + target.value
+        //       : target.value;
+        //   } else {
+        //     customer[target.name] = customer[target.name].replace(
+        //       target.value,
+        //       ""
+        //     );
+        //   }
+        //   customer[target.name] = customer[target.name]
+        //     .replace(/^,/, "")
+        //     .replace(/,,/gm, ",");
 
-          return { customer };
-        });
+        //   return { customer };
+        // });
 
         break;
 
@@ -61,10 +77,11 @@ class App extends React.Component {
   }
 
   handleButtonClicked(event) {
-    this.setState({ showView: true, customerView: { ...this.state.customer } });
+    this.setState({ showView: true, customer: { ...this.customer } });
   }
 
   render() {
+    console.log("Hi, I'm App Rendered");
     return (
       <div className="App">
         <Container>
@@ -76,7 +93,6 @@ class App extends React.Component {
           <Row>
             <Col>
               <CreateForm
-                dataInput={this.state.customer}
                 elementsInForm={FakeData.elementsInForm}
                 handleInputChange={this.handleInputChange}
                 handleButtonClicked={this.handleButtonClicked}
@@ -93,7 +109,7 @@ class App extends React.Component {
             <Col>
               {this.state.showView && (
                 <ViewForm
-                  dataInput={this.state.customerView}
+                  dataInput={this.state.customer}
                   elementsInForm={FakeData.elementsInForm}
                 />
               )}
