@@ -20,7 +20,6 @@ class App extends React.Component {
   }
 
   handleInputChange(event) {
-    console.log(event.target);
     const target = event.target;
 
     switch (target.type) {
@@ -28,11 +27,6 @@ class App extends React.Component {
       case FakeData.elementsOfFormType.ComboBox:
       case FakeData.elementsOfFormType.Input:
         this.customer[target.name] = target.value;
-        // this.setState((prevState) => {
-        //   let customer = Object.assign({}, prevState.customer);
-        //   customer[target.name] = target.value;
-        //   return { customer };
-        // });
 
         break;
       case FakeData.elementsOfFormType.CheckBox:
@@ -49,25 +43,6 @@ class App extends React.Component {
         this.customer[target.name] = this.customer[target.name]
           .replace(/^,/, "")
           .replace(/,,/gm, ",");
-        console.log(this.customer);
-        // this.setState((prevState) => {
-        //   let customer = Object.assign({}, prevState.customer);
-        //   if (target.checked) {
-        //     customer[target.name] = customer[target.name]
-        //       ? customer[target.name] + "," + target.value
-        //       : target.value;
-        //   } else {
-        //     customer[target.name] = customer[target.name].replace(
-        //       target.value,
-        //       ""
-        //     );
-        //   }
-        //   customer[target.name] = customer[target.name]
-        //     .replace(/^,/, "")
-        //     .replace(/,,/gm, ",");
-
-        //   return { customer };
-        // });
 
         break;
 
@@ -81,7 +56,6 @@ class App extends React.Component {
   }
 
   render() {
-    console.log("Hi, I'm App Rendered");
     return (
       <div className="App">
         <Container>

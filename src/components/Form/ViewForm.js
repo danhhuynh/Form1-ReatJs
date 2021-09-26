@@ -2,7 +2,6 @@ import React from "react";
 
 class ViewForm extends React.Component {
   render() {
-    console.log("Hi, I'm ViewForm rendered");
     return (
       <div inline>
         <span>FirstName: {this.props.dataInput.first_name}</span>
