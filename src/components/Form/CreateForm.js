@@ -17,6 +17,7 @@ class CreateForm extends React.Component {
           return (
             <Input
               ele={ele}
+              key={index}
               dataInput={dataInput}
               handleInputChange={this.props.handleInputChange}
             />
@@ -25,6 +26,7 @@ class CreateForm extends React.Component {
           return (
             <SaveButton
               ele={ele}
+              key={index}
               handleButtonClicked={this.props.handleButtonClicked}
             />
           );
@@ -33,6 +35,7 @@ class CreateForm extends React.Component {
           return (
             <OptionTickBox
               ele={ele}
+              key={index}
               dataInput={dataInput}
               handleInputChange={this.props.handleInputChange}
             />
@@ -41,6 +44,7 @@ class CreateForm extends React.Component {
           return (
             <ComboBox
               ele={ele}
+              key={index}
               dataInput={dataInput}
               handleInputChange={this.props.handleInputChange}
             />
@@ -54,7 +58,7 @@ class CreateForm extends React.Component {
   }
 
   render() {
-    return <Form inline>{this.renderElement()}</Form>;
+    return <Form inline={"true"}>{this.renderElement()}</Form>;
   }
 }
 

@@ -10,7 +10,7 @@ class ViewForm extends React.Component {
       switch (ele.view_type) {
         case elementsOfFormType.Input:
           return (
-            <Form.Group className="mb-3" controlId={ele.name}>
+            <Form.Group readOnly className="mb-3" controlId={ele.name}>
               <InputGroup className="mb-3">
                 <InputGroup.Text>{ele.title}</InputGroup.Text>
                 <Form.Control type="text" value={dataInput[ele.name]} />

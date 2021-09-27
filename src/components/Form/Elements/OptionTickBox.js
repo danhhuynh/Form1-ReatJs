@@ -11,10 +11,11 @@ function OptionTickBox(props) {
     return (
       <Form.Check
         inline
+        key={index}
         label={item}
         name={props.ele.name}
         value={item}
-        multi={props.ele.edit_type === elementsOfFormType.CheckBox}
+        multi={(props.ele.edit_type === elementsOfFormType.CheckBox).toString()}
         type={props.ele.edit_type}
         checked={checked}
         id={`inline-${props.ele.edit_type}-${index}`}
